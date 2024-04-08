@@ -32,5 +32,5 @@ npm start
 1. Can be used as a Home page for your eCommerce application by changing the logo and the fetch URL
 2. eCommerce product page can be used by changing the logo and the fetch URL
 
-For any queries do feel free to contact at sudhindevan@gmail.com
+For any queries do feel free to contact at sudhindevan@gmail.com,   
 the work is hosted on https://birdvision.netlify.app/
