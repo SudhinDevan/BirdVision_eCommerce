@@ -23,7 +23,8 @@ const ProductCard = (props) => {
           </h1>
           <div className="flex justify-between">
             <h1 className="text-gray-700 text-lg font-semibold">
-            &#8377;{` `}{props.price}
+              &#8377;{` `}
+              {props.price}
             </h1>
             {liked ? (
               <svg

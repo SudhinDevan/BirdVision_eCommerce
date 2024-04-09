@@ -10,6 +10,7 @@ import HorizontalLine from "../Component/HorizontalLine";
 import MiniFooter from "../Component/MiniFooter";
 import { Bars } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
+import Pagination from "../Component/Pagination";
 
 const Home = () => {
   const [products, setProducts] = useState(null);
@@ -125,26 +126,13 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* pagination */}
           {products && (
-            <div className="flex justify-center my-4">
-              <button
-                onClick={() => handlePageChange(page - 1)}
-                disabled={page === 1}
-                className="px-3 py-1 mx-2 bg-gray-200 rounded-md hover:bg-gray-400 cursor-pointer"
-              >
-                Prev
-              </button>
-              <button
-                onClick={() => handlePageChange(page + 1)}
-                disabled={products.length < 10} // Assuming each page fetches 10 products
-                className="px-3 py-1 mx-2 bg-gray-200 rounded-md hover:bg-gray-400 cursor-pointer"
-              >
-                Next
-              </button>
-            </div>
+            <Pagination
+              page={page}
+              products={products}
+              handlePageChange={handlePageChange}
+            />
           )}
-          {/* pagination */}
           <div className="md:block hidden">
             <Footer />
           </div>
