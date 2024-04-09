@@ -14,15 +14,20 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const [products, setProducts] = useState(null);
   const [filter, setFilter] = useState(true);
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [page]);
 
   const fetchData = async () => {
     try {
-      const response = await fetch("https://dummyjson.com/products");
+      const response = await fetch(
+        `https://dummyjson.com/products?limit=10&skip=${
+          (page - 1) * 10
+        }&select=title,price,thumbnail`
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch data");
       }
@@ -35,6 +40,11 @@ const Home = () => {
 
   const handleFilterChange = (value) => {
     setFilter(value);
+  };
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -115,6 +125,26 @@ const Home = () => {
               </div>
             </div>
           </div>
+          {/* pagination */}
+          {products && (
+            <div className="flex justify-center my-4">
+              <button
+                onClick={() => handlePageChange(page - 1)}
+                disabled={page === 1}
+                className="px-3 py-1 mx-2 bg-gray-200 rounded-md hover:bg-gray-400 cursor-pointer"
+              >
+                Prev
+              </button>
+              <button
+                onClick={() => handlePageChange(page + 1)}
+                disabled={products.length < 10} // Assuming each page fetches 10 products
+                className="px-3 py-1 mx-2 bg-gray-200 rounded-md hover:bg-gray-400 cursor-pointer"
+              >
+                Next
+              </button>
+            </div>
+          )}
+          {/* pagination */}
           <div className="md:block hidden">
             <Footer />
           </div>
